@@ -153,3 +153,10 @@ Jenkins usa il Docker della macchina ospite: le immagini e i container creati da
 - Cambiare le credenziali di Grafana prima di usarlo fuori da un ambiente di prova.
 - Il file pickle va caricato solo da fonti fidate.
 - Dashboard: modificabile da Grafana, il file di partenza e `monitoraggio/grafana/dashboards/sentiment.json`.
+
+
+## Repository
+
+https://github.com/kloudww/progetto-sentiment
+
+Gli screenshot del sistema in funzione sono nella cartella `screenshot`.
