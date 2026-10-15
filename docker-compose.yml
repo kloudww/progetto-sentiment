@@ -1,0 +1,47 @@
+name: sentiment
+
+services:
+  api:
+    build:
+      context: .
+      target: produzione
+    image: sentiment-api:latest
+    container_name: sentiment-api
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  prometheus:
+    build:
+      context: ./monitoraggio
+      dockerfile: Dockerfile.prometheus
+    image: sentiment-prometheus:latest
+    container_name: sentiment-prometheus
+    volumes:
+      - dati_prometheus:/prometheus
+    ports:
+      - "9090:9090"
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  grafana:
+    build:
+      context: ./monitoraggio
+      dockerfile: Dockerfile.grafana
+    image: sentiment-grafana:latest
+    container_name: sentiment-grafana
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    volumes:
+      - dati_grafana:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
+volumes:
+  dati_prometheus:
+  dati_grafana:
