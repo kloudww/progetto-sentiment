@@ -130,6 +130,8 @@ Configurazione:
 4. Trigger automatico: nelle impostazioni del repository GitHub aggiungere un webhook verso `http://SERVER_JENKINS/github-webhook/` per gli eventi push. Con GitLab installare il plugin GitLab e sostituire `githubPush()` con `gitlab(triggerOnPush: true)` nel Jenkinsfile.
 5. Email: configurare il server SMTP in Gestisci Jenkins, Sistema, Notifica via email, e cambiare `DESTINATARIO` nel Jenkinsfile.
 
+Nota sulle notifiche: nell'ambiente di prova non e configurato un server SMTP, quindi l'invio dell'email fallisce con l'errore "Couldn't connect to host, port: localhost, 25". Il Jenkinsfile gestisce l'errore: l'esito (SUCCESSO o FALLITA) viene comunque scritto nella console e la pipeline prosegue senza interrompersi. Con un server SMTP configurato come descritto al punto 5, la stessa notifica viene inviata via email all'indirizzo indicato in DESTINATARIO.
+
 ### Jenkins in locale con Docker
 
 Prima fermare l'eventuale stack avviato a mano (`docker compose down`), per liberare le porte.
